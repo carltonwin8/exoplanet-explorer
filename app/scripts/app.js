@@ -64,8 +64,29 @@ Instructions:
      */
     getJSON('../data/earth-like-results.json')
     .then(function(response) {
+      var planets=response.results.length;
+      var tInfo = {};
       response.results.forEach(function(url) {
-        getJSON(url).then(createPlanetThumb);
+        getJSON(url).then(function(data) {
+          var ordered = true;
+          if (ordered) {
+            console.log(data);
+            var name = data.pl_name.replace(/\s/g, '');
+            console.log(name);
+            tInfo[name] = data;
+            planets--;
+            if (planets === 0) {
+              console.log('got all info');
+              response.results.forEach(function(url) {
+                var name2 = url.split('/').pop().split('.')[0];
+                console.log(tInfo[name2]);
+                createPlanetThumb(tInfo[name2]);
+              });
+            }
+          } else {
+            createPlanetThumb(data);
+          }
+        });
       });
     });
   });

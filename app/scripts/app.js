@@ -59,6 +59,15 @@ Instructions:
     Your code goes here! Uncomment the next line when you're ready to start!
      */
 
-    // getJSON('../data/earth-like-results.json')
+    getJSON('../data/earth-like-results.json')
+      .then(function (data) {
+        console.log(data);
+        addSearchHeader(data.query);
+        data.results.map(function (e) {
+          console.log(e);
+          getJSON(e)
+            .then(createPlanetThumb);
+        });
+      });
   });
 })(document);

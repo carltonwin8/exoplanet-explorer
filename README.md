@@ -27,6 +27,9 @@ Contains only my code as the course solution was not significantly different.
 
 ## map-start
 
+  - serial access of network via map and fetch
+  - parallel access of network via map and fetch
+
 ## master
 
 Updated the readme with my notes.

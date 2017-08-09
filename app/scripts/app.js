@@ -69,15 +69,8 @@ Instructions:
       let p = Promise.resolve();
       response.results.forEach(function(url) {
         p = p
-            .then(() => {
-              getJSON(url)
-              .then(function(data) {
-                createPlanetThumb(data);
-              })
-              .catch((e) => {
-                console.log(e);
-              });
-            });
+        .then(() => getJSON(url))
+        .then(createPlanetThumb);
       });
     })
     .catch(e => console.log(e));

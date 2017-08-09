@@ -63,10 +63,13 @@ Instructions:
       .then(function (data) {
         console.log(data);
         addSearchHeader(data.query);
-        data.results.map(function (e) {
-          console.log(e);
-          getJSON(e)
-            .then(createPlanetThumb);
+        var p = Promise.resolve();
+        data.results.map(function (url) {
+          console.log(url);
+          p = p
+          .then(function () { return getJSON(url); } )
+          .then(function (data) { console.log(data); return createPlanetThumb(data);})
+          .catch(function (e) { console.log(e); });
         });
       });
   });

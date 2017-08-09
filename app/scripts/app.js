@@ -63,12 +63,9 @@ Instructions:
       .then(function (data) {
         console.log(data);
         addSearchHeader(data.query);
-        var p = Promise.resolve();
         data.results.map(function (url) {
-          console.log(url);
-          p = p
-          .then(function () { return getJSON(url); } )
-          .then(function (data) { console.log(data); return createPlanetThumb(data);})
+          getJSON(url)
+          .then(createPlanetThumb)
           .catch(function (e) { console.log(e); });
         });
       });
